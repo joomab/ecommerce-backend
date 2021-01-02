@@ -1,3 +1,3 @@
 # ecommerce-backend
 
-A Platzi Express course
+This repo is of a platzi compleated course about express with node.js
