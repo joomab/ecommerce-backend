@@ -1,8 +1,10 @@
 const express = require("express");
 const boom = require("@hapi/boom");
 const path = require("path");
+const helmet = require("helmet");
 const productsRouter = require("./routes/views/products");
 const productsApiRouter = require("./routes/api/products");
+const authApiRouter = require("./routes/api/auth");
 
 const {
   logErrors,
@@ -16,7 +18,8 @@ const isRequestAjaxOrApi = require("./utils/isRequestAjaxOrApi");
 const app = express();
 
 //Middlewares (Que pasen antes que todo (si así se requiere.))
-app.use(express.json());
+app.use(helmet());
+app.use(express.json()); //Equivalente de body.parse
 
 // Static files
 //Video 2.6 Manejo de archivos estáticos:   (poniendo un prefijo)
@@ -33,6 +36,7 @@ app.set("view engine", "pug");
 //Para usar routes, se utiliza app.use
 app.use("/products", productsRouter);
 app.use("/api/products", productsApiRouter);
+app.use("/api/auth", authApiRouter);
 
 //redirect
 
